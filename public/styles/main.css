@@ -1,3 +1,58 @@
-header .head {
-    background-color: blue;
+.head {
+  font-family: "Tangerine", cursive;
+  font-weight: bolder;
+  font-style: normal;
+  color: #799351;
+  text-align: left;
+}
+
+header {
+  background-color: antiquewhite;
+  padding: 5px;
+}
+
+header .search_bar {
+  text-align: right;
+  padding: 0 10px;
+}
+
+header .search_input {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+header .search_button {
+  border-radius: 5px;
+  border: 1px solid black;
+  color: #24323d;
+}
+
+header .check_button {
+  border-radius: 5px;
+  border: 1px solid black;
+  color: #24323d;
+}
+
+body {
+  background-color: #24323d;
+  padding: 0;
+  border: 0;
+}
+
+.container {
+  flex: 1;
+  padding: 20px;
+}
+
+.book-box {
+  
+    color:antiquewhite;
+}
+
+.foot {
+  background-color: antiquewhite;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  flex: 0 0 auto;
 }

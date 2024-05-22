@@ -10,7 +10,7 @@ const port = 3000;
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  database: "",
+  database: "My Book",
   password: "123456",
   port: 5432,
 });
@@ -23,9 +23,9 @@ app.use(express.static("public"));
 let x = [];
 
 // axios request for id
-const query = "Book Name";
+const query = "the lord of the rings";
 async function searchBookandCoverId(query) {
-  const url = `https://openlibrary.org/search.json?q=${query}`;
+  const url = `https://openlibrary.org/search.json?title=${query}&limit=10`;
 
   try {
     const response = await axios.get(url);
@@ -48,7 +48,7 @@ async function searchBookandCoverId(query) {
 // axios request for image
 function getCoverImageUrl(coverID) {
   if (coverID) {
-    return `https://covers.openlibrary.org/b/id/${coverID}-L.jpg`;
+    return `https://covers.openlibrary.org/b/id/${coverID}-M.jpg`;
   } else {
     return null;
   }
@@ -65,7 +65,7 @@ searchBookandCoverId(query).then((coverID) => {
 
 // get: display title and image to user
 app.get("/", async (req, res) => {
-  const query = "Book Name";
+  const query = "the lord of the rings";
   const coverInfo = await searchBookandCoverId(query);
 
   if (coverInfo) {
