@@ -1,3 +1,10 @@
+/* header section */
+header {
+  background-color: antiquewhite;
+  padding: 5px;
+}
+
+/* header h1 */
 .head {
   font-family: "Tangerine", cursive;
   font-weight: bolder;
@@ -6,49 +13,64 @@
   text-align: left;
 }
 
-header {
-  background-color: antiquewhite;
-  padding: 5px;
-}
-
+/* header search, button */
 header .search_bar {
   text-align: right;
   padding: 0 10px;
 }
 
+/* header search portion */
 header .search_input {
   border-radius: 5px;
   border: 1px solid black;
 }
 
+/*
 header .search_button {
   border-radius: 5px;
   border: 1px solid black;
   color: #24323d;
 }
+*/
 
+/* header check button */
 header .check_button {
   border-radius: 5px;
   border: 1px solid black;
   color: #24323d;
 }
 
+/* body section */
 body {
   background-color: #24323d;
   padding: 0;
-  border: 0;
+  margin: 0;
 }
 
-.container {
+/* main body section */
+main {
+  margin: auto;
+  max-width: 50rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+/* individual book section */
+.book-box { 
   flex: 1;
   padding: 20px;
-}
-
-.book-box {
-  
     color:antiquewhite;
 }
 
+/* individual book section img box */
+.book-box .img-box {
+border: 1px solid antiquewhite;
+padding: 2px;
+float: left;
+}
+
+/* footer section */
 .foot {
   background-color: antiquewhite;
   text-align: center;
