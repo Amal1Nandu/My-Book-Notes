@@ -11,6 +11,8 @@ header {
   font-style: normal;
   color: #799351;
   text-align: left;
+  font-size: 3rem;
+  display: inline;
 }
 
 /* header search, button */
@@ -23,6 +25,8 @@ header .search_bar {
 header .search_input {
   border-radius: 5px;
   border: 1px solid black;
+  width: 400px;
+  cursor: pointer;
 }
 
 /*
@@ -37,7 +41,9 @@ header .search_button {
 header .check_button {
   border-radius: 5px;
   border: 1px solid black;
-  color: #24323d;
+  background-color: #24323d;
+  color: antiquewhite;
+  cursor: pointer;
 }
 
 /* body section */
@@ -48,7 +54,7 @@ body {
 }
 
 /* main body section */
-main {
+.main-section {
   margin: auto;
   max-width: 50rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -56,17 +62,46 @@ main {
   line-height: 30px;
 }
 
+/* submit-button [note.ejs] */
+.main-section .submit-button {
+  text-align: right;
+ 
+}
+
+/* submit-button color [note.ejs] */
+.main-section .submit_button{
+  background-color: antiquewhite;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* notes and preview head [notes.ejs] */
+.main-section .notes-head, .preview-head {
+  color: antiquewhite;
+}
+
+/* notes and preview textarea [note.ejs] */
+.main-section #previewTextarea, #noteTextarea{
+  min-width: 30rem;
+  min-height: 10rem;
+  background-color: antiquewhite;
+  border-radius: 5px;
+}
+
+/* textarea adjustment [note.ejs]*/
+.main-section .container-notes {
+  margin-left: 280px;
+}
+
 /* individual book section */
 .book-box { 
   flex: 1;
   padding: 20px;
-    color:antiquewhite;
+  color:antiquewhite;
 }
 
 /* individual book section img box */
 .book-box .img-box {
-border: 1px solid antiquewhite;
-padding: 2px;
 float: left;
 }
 

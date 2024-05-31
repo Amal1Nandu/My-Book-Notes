@@ -20,43 +20,11 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let x = [];
+let mybooknotes = [{
+  cover_i: 1, cover_title: "", cover_img: "", authur_name: "", book_preview: "", book_note: "", read_date: 123, read_rating: 10
+}]; // need to check
 
-// axios request for id
-
-// get: display title and image to user
-app.get("/", async (req, res) => {
-  const query = req.query.search_text;
-  const coverInfo = await searchBookandCoverId(query);
-
-  if (coverInfo) {
-    const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
-    res.render("index.ejs", {
-      coverID: coverInfo.coverID,
-      coverTitle: coverInfo.coverTitle,
-      authorName: coverInfo.authorName,
-      coverImageUrl: coverImageUrl
-    });
-  } else {
-    res.send("No books found or error occured.");
-  }
-});
-
-app.post("/", async (req, res) => {
-  const query = req.body.search_text;
-
-  const coverInfo = await searchBookandCoverId(query);
-
-  if (coverInfo) {
-    const coverImageURL = getCoverImageUrl(coverInfo.coverID);
-    res.redirect("/")
-  } else {
-    res.send("No book found or error occured.")
-  }
-});
-
-
-  // function to search book and coverID
+  // axios function to search book and coverID
   async function searchBookandCoverId(query) {
     const url = `https://openlibrary.org/search.json?title=${query}&limit=10`;
 
@@ -88,6 +56,86 @@ app.post("/", async (req, res) => {
     }
   }
 
+  // database for retrieving
+async function bookData(query) {
+  const coverData = await searchBookandCoverId(query);
+
+  if (coverData) {
+    const result = await db.query(
+      "SELECT * FROM mybooknotes"
+    );
+    return result.rows;
+  } else {
+    return null;
+  }
+}
+
+
+// get: display title and image to user
+app.get("/", async (req, res) => {
+  const query = req.query.search_text;
+  const coverInfo = await searchBookandCoverId(query);
+
+  if (coverInfo) {
+    const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
+    res.render("index.ejs", {
+      coverID: coverInfo.coverID,
+      coverTitle: coverInfo.coverTitle,
+      authorName: coverInfo.authorName,
+      coverImageUrl: coverImageUrl
+    });
+  } else {
+    res.send("No books found or error occured.");
+  }
+});
+
+app.post("/check", async (req, res) => { 
+  const query = req.body.search_text;
+
+  const coverInfo = await searchBookandCoverId(query);
+
+  if (coverInfo) {
+      const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
+    res.render("note.ejs", {
+      coverID: coverInfo.coverID,
+      coverTitle: coverInfo.coverTitle,
+      authorName: coverInfo.authorName,
+      coverImageUrl: coverImageUrl,
+    }); 
+
+    
+  } else {
+    res.send("No book found or error occured.")
+  }
+});
+
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
 });
+
+/* 
+
+get homepage copy
+  if (coverInfo) {
+    const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
+    res.render("index.ejs", {
+      coverID: coverInfo.coverID,
+      coverTitle: coverInfo.coverTitle,
+      authorName: coverInfo.authorName,
+      coverImageUrl: coverImageUrl
+    });
+  } else {
+    res.send("No books found or error occured.");
+  }
+  */
+
+  /* 
+  post reuest copy
+    if (coverInfo) {
+  
+    res.redirect(`/?search_text=${query}`);
+  } else {
+    res.send("No book found or error occured.")
+  }
+   
+  */

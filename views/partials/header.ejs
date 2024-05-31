@@ -3,12 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/main.css" />
-    <!--css for head-->
+    <title>Book Notes</title>
+    <!-- css link-->
+  <link rel="stylesheet" href="styles/main.css" />
+      <!--css font for head-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tangerine" rel="stylesheet">
-    <title>Book Notes</title>
+
+<!--js script-->
+    <script>
+        function flashEffect() {
+            const button = document.querySelector('.check_button');
+            button.style.backgroundColor = '#677885'; // Change to your desired flash color
+            setTimeout(() => {
+                button.style.backgroundColor = '#24323d'; // Reset to original color
+            }, 200); // Adjust the duration (milliseconds) as needed
+        }
+    </script>
   </head>
   <body>
     <header>
@@ -16,12 +28,14 @@
       <div >  
         <h1 class="head"> My Book notes</h1>        
         <div class="search_bar">
+          <form action="/check" method="post">
           <input type="text" name="search_text" class="search_input" placeholder="Enter the book name">         
-          <button class="check_button">Check</button>
+          <button type="submit" class="check_button" onclick="flashEffect()">Check</button>
+          </form>
         </div>
       </div>
 
     </header>
-<main>
+<main class="main-section">
 
   <!-- <button class="search_button">Search</button> -->

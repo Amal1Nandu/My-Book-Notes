@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Note page</title>
+  </head>
+  <body>
+    <section class="main-section">
+      <form action="/note" method="post">
+
+        <!--cover page, title, author and date-->
+         <div class="book-box">
+                  <figure class="img-box">
+           <img src="<%= coverImageUrl %>" alt="<%= coverTitle %>-cover"> 
+        </figure>
+        <h2><%= coverTitle %> by <u><%= authorName %></u> </h2>
+        <small>READ DATE: .HOW STRONGLY I RECOMMEND IT: 10/10</small>
+         </div>
+
+        <!--preview-->
+        <div class="container-preview">
+          <div class="preview-head">
+            <h3>Preview</h3>
+          </div>
+          <textarea id="previewTextarea" placeholder="Type your preview here..."></textarea>
+        </div>
+
+        <!--notes-->
+        <div class="container-notes">
+          <div class="notes-head">
+            <h3>Notes</h3>
+          </div>
+          <textarea id="noteTextarea" placeholder="Type your preview here..."></textarea>
+        </div>
+
+        <!--submit button-->
+        <div class="submit-button">
+          <form action="/submit" method="post">
+            <button class="submit_button" onclick="flashEffect()" >Submit</button>
+          </form>
+        </div>
+
+      </form>
+    </section>
+
+  </body>
+</html>
