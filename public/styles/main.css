@@ -75,8 +75,8 @@ body {
   cursor: pointer;
 }
 
-/* notes and preview head [notes.ejs] */
-.main-section .notes-head, .preview-head {
+/* notes, rating and preview head [notes.ejs] */
+.main-section .notes-head, .preview-head, .rating {
   color: antiquewhite;
 }
 

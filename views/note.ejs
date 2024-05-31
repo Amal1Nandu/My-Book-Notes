@@ -8,7 +8,12 @@
   </head>
   <body>
     <section class="main-section">
-      <form action="/note" method="post">
+      <form action="/submit" method="post">
+
+        <!-- Include hidden fields to pass cover info-->
+        <input type="hidden" name="coverTitle" value="<%= coverTitle %>">
+        <input type="hidden" name="authorName" value="<%= authorName %>">
+        <input type="hidden" name="coverImageUrl" value="<%= coverImageUrl %>">
 
         <!--cover page, title, author and date-->
          <div class="book-box">
@@ -16,15 +21,18 @@
            <img src="<%= coverImageUrl %>" alt="<%= coverTitle %>-cover"> 
         </figure>
         <h2><%= coverTitle %> by <u><%= authorName %></u> </h2>
-        <small>READ DATE: .HOW STRONGLY I RECOMMEND IT: 10/10</small>
          </div>
 
+         <!-- Rating -->
+         <label class="rating" for="rating">Rating (1-10):</label>
+         <input type="number" id="rating" name="rating" min="1" max="10" required>
+         
         <!--preview-->
         <div class="container-preview">
           <div class="preview-head">
             <h3>Preview</h3>
           </div>
-          <textarea id="previewTextarea" placeholder="Type your preview here..."></textarea>
+          <textarea name="previewTextarea" id="previewTextarea" placeholder="Type your preview here..."></textarea>
         </div>
 
         <!--notes-->
@@ -32,14 +40,12 @@
           <div class="notes-head">
             <h3>Notes</h3>
           </div>
-          <textarea id="noteTextarea" placeholder="Type your preview here..."></textarea>
+          <textarea name="noteTextarea" id="noteTextarea" placeholder="Type your preview here..."></textarea>
         </div>
 
         <!--submit button-->
         <div class="submit-button">
-          <form action="/submit" method="post">
-            <button class="submit_button" onclick="flashEffect()" >Submit</button>
-          </form>
+            <button class="submit_button" onclick="flashEffect()" >Submit</button>          
         </div>
 
       </form>
