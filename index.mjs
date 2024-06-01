@@ -20,19 +20,6 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let mybooknotes = [
-  {
-    cover_i: 1,
-    cover_title: "",
-    cover_img: "",
-    authur_name: "",
-    book_preview: "",
-    book_note: "",
-    read_date: 123,
-    read_rating: 10,
-  },
-]; // need to check
-
 // axios function to search book and coverID
 async function searchBookandCoverId(query) {
   const url = `https://openlibrary.org/search.json?title=${query}&limit=10`;

@@ -29,14 +29,6 @@ header .search_input {
   cursor: pointer;
 }
 
-/*
-header .search_button {
-  border-radius: 5px;
-  border: 1px solid black;
-  color: #24323d;
-}
-*/
-
 /* header check button */
 header .check_button {
   border-radius: 5px;
@@ -60,27 +52,40 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 20px;
   line-height: 30px;
+  overflow: hidden;
 }
 
-/* submit-button [note.ejs] */
-.main-section .submit-button {
-  text-align: right;
- 
+/* main body section p overflow resisting */
+p {
+  word-wrap: break-word; /* Ensures long words break to fit the container */
+  word-break: break-word; /* Breaks long words at arbitrary points */
+  overflow-wrap: break-word; /* Breaks long words at arbitrary points */
+  max-width: 100%; /* Ensures paragraphs respect their container's width */
 }
 
-/* submit-button color [note.ejs] */
-.main-section .submit_button{
+/* preview and note color [note.ejs] */
+.p-preview, .p-note{
+  color: antiquewhite;
+}
+
+/* submit-button [submit.ejs, note.ejs] */
+.main-section .submit-button, .back-button { 
+  text-align: right; 
+}
+
+/* submit-button color [submit.ejs, note.ejs] */
+.main-section .submit_button, .back_button{
   background-color: antiquewhite;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer; 
 }
 
-/* notes, rating and preview head [notes.ejs] */
+/* notes, rating and preview head [submit.ejs] */
 .main-section .notes-head, .preview-head, .rating {
   color: antiquewhite;
 }
 
-/* notes and preview textarea [note.ejs] */
+/* notes and preview textarea [submit.ejs] */
 .main-section #previewTextarea, #noteTextarea{
   min-width: 30rem;
   min-height: 10rem;
@@ -88,7 +93,7 @@ body {
   border-radius: 5px;
 }
 
-/* textarea adjustment [note.ejs]*/
+/* textarea adjustment [submit.ejs]*/
 .main-section .container-notes {
   margin-left: 280px;
 }
@@ -98,6 +103,13 @@ body {
   flex: 1;
   padding: 20px;
   color:antiquewhite;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* section border */
+#section_border {
+border-bottom: 1px solid antiquewhite;
 }
 
 /* individual book section img box */

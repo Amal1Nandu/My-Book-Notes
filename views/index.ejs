@@ -1,7 +1,7 @@
 <%- include('partials/header.ejs') %>
 <section class="all-book">
   <% books.forEach(book => { %>
-  <div class="book-box">
+  <div class="book-box" id="section_border">
     <figure class="img-box">
       <img src="<%= book.cover_img %>" alt="<%= book.cover_title %>-cover" />
     </figure>
