@@ -66,45 +66,62 @@ function getCoverImageUrl(coverID) {
 }
 
 // database for retrieving
-async function bookData(query) {
-  const coverData = await searchBookandCoverId(query);
-
-  if (coverData) {
-    const result = await db.query("SELECT * FROM mybooknotes");
-    return result.rows;
-  } else {
-    return null;
-  }
+async function bookData() {
+  const result = await db.query("SELECT * FROM mybooknotes ORDER BY id DESC");
+  return result.rows;
 }
 
 // get: display title and image to user
 app.get("/", async (req, res) => {
-  const query = req.query.search_text;
-  const coverInfo = await searchBookandCoverId(query);
+  try {
+    const books = await bookData();
+    if (books.length > 0) {
+      res.render("index.ejs", {
+books: books
+      });
+    } else {
+      res.send("No books found or error occured.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.send("An error occured while retrieving the books.");
+  }
+});
 
-  if (coverInfo) {
-    const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
-    res.render("index.ejs", {
-   //   coverID: coverInfo.coverID,
-      coverTitle: coverInfo.coverTitle,
-      authorName: coverInfo.authorName,
-      coverImageUrl: coverImageUrl,
-    });
-  } else {
-    res.send("No books found or error occured.");
+// get: Dynamic route to handle individual book page
+app.get("/book/:id", async (req, res) => {
+  const bookId = req.params.id;
+  try {
+    const result = await db.query("SELECT * FROM mybooknotes WHERE id = $1", [bookId] );
+    if (result.rows.length > 0) {
+      const book = result.rows[0];
+      res.render("note.ejs", {
+        coverID: book.cover_i,
+        coverTitle: book.cover_title,
+        authorName: book.authur_name,
+        coverImageURL: book.cover_img,
+        bookPreview: book.book_preview,
+        bookNote: book.book_note,
+        bookDate: book.read_date,
+        readRating: book.read_rating
+      });
+    } else {
+      res.send("book not found.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.send("An error occured while retrieving the book.");
   }
 });
 
 // page for preview and notes will open along with all other data recieved
 app.post("/check", async (req, res) => {
   const query = req.body.search_text;
-
   const coverInfo = await searchBookandCoverId(query);
 
   if (coverInfo) {
     const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
-    res.render("note.ejs", {
-    //  coverID: coverInfo.coverID,
+    res.render("submit.ejs", {
       coverTitle: coverInfo.coverTitle,
       authorName: coverInfo.authorName,
       coverImageUrl: coverImageUrl,
@@ -116,9 +133,8 @@ app.post("/check", async (req, res) => {
 
 // saving data on database
 app.post("/submit", async (req, res) => {
-
   // retrieved from the note.ejs file
-  const {coverTitle, authorName, coverImageUrl } = req.body;
+  const { coverTitle, authorName, coverImageUrl } = req.body;
 
   const preview = req.body.previewTextarea;
   const notes = req.body.noteTextarea;
@@ -136,6 +152,11 @@ app.post("/submit", async (req, res) => {
   }
 });
 
+// back button
+app.post("/back", async (req, res) => {
+  res.redirect("/");
+});
+
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
 });
@@ -143,6 +164,9 @@ app.listen(port, () => {
 /* 
 
 get homepage copy
+ const query = req.query.search_text;
+  const coverInfo = await searchBookandCoverId(query);
+
   if (coverInfo) {
     const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
     res.render("index.ejs", {
@@ -165,4 +189,6 @@ get homepage copy
     res.send("No book found or error occured.")
   }
    
+   
+    
   */

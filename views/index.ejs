@@ -1,19 +1,18 @@
 <%- include('partials/header.ejs') %>
 <section class="all-book">
-    
-    <div class="book-box">
-        <figure class="img-box">
-           <img src="<%= coverImageUrl %>" alt="<%= coverTitle %>-cover"> 
-        </figure>
-        <h2><%= coverTitle %> by <u><%= authorName %></u> </h2>
-        <small>READ DATE: .HOW STRONGLY I RECOMMEND IT: 10/10</small>
+  <% books.forEach(book => { %>
+  <div class="book-box">
+    <figure class="img-box">
+      <img src="<%= book.cover_img %>" alt="<%= book.cover_title %>-cover" />
+    </figure>
+    <h2><%= book.cover_title %> by <u><%= book.authur_name %></u></h2>
+    <small> READ DATE: <%= book.read_date %> .HOW STRONGLY I RECOMMEND IT: <%= book.read_rating %>/10 </small>
 
-        <p>preview</p>
-        <p>What I have read (note link)</p>
-    </div>
-
+    <h3>Preview:</h3>
+    <p> <%= book.book_preview %> </p>
+    <p>What I have read <a href="/book/<%= book.id %>">Read Notes</a> </p>
+  </div>
+  <% }) %>
 </section>
 
-
 <%- include('partials/footer.ejs') %>
-    

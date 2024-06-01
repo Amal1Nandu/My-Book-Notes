@@ -8,44 +8,38 @@
   </head>
   <body>
     <section class="main-section">
-      <form action="/submit" method="post">
-
-        <!-- Include hidden fields to pass cover info-->
-        <input type="hidden" name="coverTitle" value="<%= coverTitle %>">
-        <input type="hidden" name="authorName" value="<%= authorName %>">
-        <input type="hidden" name="coverImageUrl" value="<%= coverImageUrl %>">
+      <form action="/back" method="post">
 
         <!--cover page, title, author and date-->
          <div class="book-box">
                   <figure class="img-box">
-           <img src="<%= coverImageUrl %>" alt="<%= coverTitle %>-cover"> 
+           <img src="<%= coverImageURL %>" alt="<%= coverTitle %>-cover"> 
         </figure>
         <h2><%= coverTitle %> by <u><%= authorName %></u> </h2>
-         </div>
 
-         <!-- Rating -->
-         <label class="rating" for="rating">Rating (1-10):</label>
-         <input type="number" id="rating" name="rating" min="1" max="10" required>
-         
+        <!-- Rating -->
+        <small>READ DATE: <%= bookDate %> .HOW STRONGLY I RECOMMEND IT: <%= readRating %>/10</small>
+         </div>
+     
         <!--preview-->
         <div class="container-preview">
           <div class="preview-head">
-            <h3>Preview</h3>
+            <h3>Preview:</h3>
           </div>
-          <textarea name="previewTextarea" id="previewTextarea" placeholder="Type your preview here..."></textarea>
+          <p> <%= bookPreview %> </p>
         </div>
 
         <!--notes-->
         <div class="container-notes">
           <div class="notes-head">
-            <h3>Notes</h3>
-          </div>
-          <textarea name="noteTextarea" id="noteTextarea" placeholder="Type your preview here..."></textarea>
+            <h3>Notes:</h3>
+          </div>  
+          <p> <%= bookNote %></p>        
         </div>
 
-        <!--submit button-->
-        <div class="submit-button">
-            <button class="submit_button" onclick="flashEffect()" >Submit</button>          
+        <!--Back button // need to improve further step-->
+        <div class="back-button">
+            <button class="back_button" onclick="flashEffect()" >Back</button>          
         </div>
 
       </form>
