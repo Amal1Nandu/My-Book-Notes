@@ -47,6 +47,8 @@ body {
 
 /* main body section */
 .main-section {
+  display: flex;
+  justify-content: center;
   margin: auto;
   max-width: 50rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -63,18 +65,34 @@ p {
   max-width: 100%; /* Ensures paragraphs respect their container's width */
 }
 
+/* delete and edit [index.ejs] */
+.btn-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: right;
+  align-items: center;
+}
+
+/* delete and edit btn [index.ejs] */
+.delete_button, .edit_button {
+  border-radius: 5px;
+  background-color: antiquewhite;
+  color: #24323d;
+  cursor: pointer;
+}
+
 /* preview and note color [note.ejs] */
 .p-preview, .p-note{
   color: antiquewhite;
 }
 
 /* submit-button [submit.ejs, note.ejs] */
-.main-section .submit-button, .back-button { 
+.main-section .submit-button, .back-button, .update-button { 
   text-align: right; 
 }
 
 /* submit-button color [submit.ejs, note.ejs] */
-.main-section .submit_button, .back_button{
+.main-section .submit_button, .back_button, .update_button{
   background-color: antiquewhite;
   border-radius: 5px;
   cursor: pointer; 
@@ -86,7 +104,7 @@ p {
 }
 
 /* notes and preview textarea [submit.ejs] */
-.main-section #previewTextarea, #noteTextarea{
+ .main-section .previewTextarea, .noteTextarea{
   min-width: 30rem;
   min-height: 10rem;
   background-color: antiquewhite;
@@ -96,6 +114,11 @@ p {
 /* textarea adjustment [submit.ejs]*/
 .main-section .container-notes {
   margin-left: 280px;
+}
+
+/* edit page*/
+.edit-book {
+  padding: 100px;
 }
 
 /* individual book section */
@@ -125,3 +148,9 @@ float: left;
   font-size: 14px;
   flex: 0 0 auto;
 }
+
+/* edit page */
+.edit-note, .edit-btn{
+  padding-right: 200px;
+}
+

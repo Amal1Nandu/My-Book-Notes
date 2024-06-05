@@ -61,10 +61,10 @@ async function bookData() {
 // get: display title and image to user
 app.get("/", async (req, res) => {
   try {
-    const books = await bookData();
+    const books = await bookData(); // retrieve fn
     if (books.length > 0) {
       res.render("index.ejs", {
-books: books
+        books: books,
       });
     } else {
       res.send("No books found or error occured.");
@@ -79,7 +79,7 @@ books: books
 app.get("/book/:id", async (req, res) => {
   const bookId = req.params.id;
   try {
-    const result = await db.query("SELECT * FROM mybooknotes WHERE id = $1", [bookId] );
+    const result = await db.query("SELECT * FROM mybooknotes WHERE id = $1", [bookId]);
     if (result.rows.length > 0) {
       const book = result.rows[0];
       res.render("note.ejs", {
@@ -90,7 +90,7 @@ app.get("/book/:id", async (req, res) => {
         bookPreview: book.book_preview,
         bookNote: book.book_note,
         bookDate: book.read_date,
-        readRating: book.read_rating
+        readRating: book.read_rating,
       });
     } else {
       res.send("book not found.");
@@ -98,6 +98,47 @@ app.get("/book/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.send("An error occured while retrieving the book.");
+  }
+});
+
+// route to render the edit form
+app.get("/edit-book/:id", async (req, res) => {
+  const bookId = req.params.id;
+  try {
+    const result = await db.query("SELECT book_preview, book_note FROM mybooknotes WHERE id = $1", [
+      bookId,
+    ]);
+    if (result.rows.length > 0) {
+      const book = result.rows[0];
+      res.render("edit-book.ejs", { book });
+    } else {
+      res.status(404).send("Book not found");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occured while retrieving the book");
+  }
+});
+
+//Route to handle the update submission
+app.post("/update-book", async (req, res) => {
+  const bookId = req.body.id;
+  const { book_preview, book_note } = req.body;
+
+  try {
+    const result = await db.query(
+      "UPDATE mybooknotes SET book_preview = $1, book_note = $2 WHERE id = $3",
+      [book_preview, book_note, bookId]
+    );
+
+    if (result.rows.length > 0) {
+      res.redirect(`/book/${bookId}`);
+    } else {
+      res.status(404).send("Book not found");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occured while updating the book");
   }
 });
 
@@ -144,38 +185,25 @@ app.post("/back", async (req, res) => {
   res.redirect("/");
 });
 
+// edit
+app.post("/edit", async (req, res) => {
+  const bookId = req.body.id;
+  // redirect to an edit form
+  res.redirect(`/edit-book/${bookId}`);
+});
+
+// delete
+app.post("/delete", async (req, res) => {
+  const bookId = req.body.id;
+  try {
+    const result = await db.query("DELETE FROM mybooknotes WHERE id = $1", [bookId]);
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Could not delete the file");
+  }
+});
+
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
 });
-
-/* 
-
-get homepage copy
- const query = req.query.search_text;
-  const coverInfo = await searchBookandCoverId(query);
-
-  if (coverInfo) {
-    const coverImageUrl = getCoverImageUrl(coverInfo.coverID);
-    res.render("index.ejs", {
-      coverID: coverInfo.coverID,
-      coverTitle: coverInfo.coverTitle,
-      authorName: coverInfo.authorName,
-      coverImageUrl: coverImageUrl
-    });
-  } else {
-    res.send("No books found or error occured.");
-  }
-  */
-
-/* 
-  post reuest copy
-    if (coverInfo) {
-  
-    res.redirect(`/?search_text=${query}`);
-  } else {
-    res.send("No book found or error occured.")
-  }
-   
-   
-    
-  */

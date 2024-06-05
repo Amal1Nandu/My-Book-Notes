@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--css link-->
+        <link rel="stylesheet" href="../styles/main.css" />
+    <title>Edit Book</title>
+</head>
+<body>
+    <section class="main-section edit-book">
+    <form action="/update-book" method="post">
+        <input type="hidden" name="id" value="<%= book.id %>">
+       <div class="editnow">
+
+        <!--preview-->
+        <div class="container-preview">
+            <div class="preview-head">
+            <h3>Preview:</h3>
+          </div>         
+            <textarea name="book_preview" class="previewTextarea" id="book_preview"><%= book.book_preview %></textarea>
+        </div>
+      
+        <!--note-->
+        <div class="container-notes edit-note">
+           <div class="notes-head">
+            <h3>Notes:</h3>
+          </div>           
+            <textarea name="book_note" class="noteTextarea" id="book_note"><%= book.book_note %></textarea>
+        </div>
+        <!--update button-->
+        <div class="update-button edit-btn">
+        <button type="submit" class="update_button btn">Update Book</button>
+    </div>
+
+    </div>
+    </form>
+    </section>
+</body>
+</html>

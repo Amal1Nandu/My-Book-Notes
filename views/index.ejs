@@ -6,12 +6,29 @@
       <img src="<%= book.cover_img %>" alt="<%= book.cover_title %>-cover" />
     </figure>
     <h2><%= book.cover_title %> by <u><%= book.authur_name %></u></h2>
-    <small> READ DATE: <%= book.read_date %> .HOW STRONGLY I RECOMMEND IT: <%= book.read_rating %>/10 </small>
+    <small>
+      READ DATE: <%= book.read_date %> .HOW STRONGLY I RECOMMEND IT: <%= book.read_rating %>/10
+    </small>
 
     <h3>Preview:</h3>
-    <p> <%= book.book_preview %> </p>
-    <p>What I have read <a href="/book/<%= book.id %>">Read Notes</a> </p>
+    <p><%= book.book_preview %></p>
+    <p>What I have read <a href="/book/<%= book.id %>">Read Notes</a></p>
+
+    <!--edit btn-->
+    <div class="btn-container">
+      <form action="/edit" method="post">
+        <input type="hidden" name="id" value="<%= book.id %>">
+        <button type="submit" class="edit_button btn" onclick="flashEffect()">Edit</button>
+      </form>
+
+      <!--delete btn-->
+      <form action="/delete" method="post">
+        <input type="hidden" name="id" value="<%= book.id %>">
+        <button type="submit" class="delete_button btn" onclick="flashEffect()">Delete</button>
+      </form>
+    </div>
   </div>
+
   <% }) %>
 </section>
 
