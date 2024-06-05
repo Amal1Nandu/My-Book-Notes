@@ -105,14 +105,14 @@ app.get("/book/:id", async (req, res) => {
 app.get("/edit-book/:id", async (req, res) => {
   const bookId = req.params.id;
   try {
-    const result = await db.query("SELECT book_preview, book_note FROM mybooknotes WHERE id = $1", [
+    const result = await db.query("SELECT * FROM mybooknotes WHERE id = $1", [
       bookId,
     ]);
     if (result.rows.length > 0) {
       const book = result.rows[0];
       res.render("edit-book.ejs", { book });
     } else {
-      res.status(404).send("Book not found");
+      res.status(404).send("Bookform not found");
     }
   } catch (error) {
     console.error(error);
@@ -130,10 +130,11 @@ app.post("/update-book", async (req, res) => {
       "UPDATE mybooknotes SET book_preview = $1, book_note = $2 WHERE id = $3",
       [book_preview, book_note, bookId]
     );
-
-    if (result.rows.length > 0) {
-      res.redirect(`/book/${bookId}`);
+    ///
+    if (result.rowCount > 0) {
+      res.redirect(`book/${bookId}`);
     } else {
+      console.error(error);
       res.status(404).send("Book not found");
     }
   } catch (error) {
