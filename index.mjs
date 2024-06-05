@@ -63,11 +63,19 @@ app.get("/", async (req, res) => {
   try {
     const books = await bookData(); // retrieve fn
     if (books.length > 0) {
+      // formatted date
+       books.forEach(book => {
+        book.read_date = new Date (book.read_date).toDateString();
+      });
       res.render("index.ejs", {
         books: books,
       });
     } else {
-      res.send("No books found or error occured.");
+      res.render("index.ejs", {
+        books: [],
+        message: "No books found or error occured.",
+      });
+      
     }
   } catch (error) {
     console.error(error);
@@ -82,14 +90,15 @@ app.get("/book/:id", async (req, res) => {
     const result = await db.query("SELECT * FROM mybooknotes WHERE id = $1", [bookId]);
     if (result.rows.length > 0) {
       const book = result.rows[0];
+      const formattedDate = new Date(book.read_date).toDateString();
       res.render("note.ejs", {
-        coverID: book.cover_i,
+       
         coverTitle: book.cover_title,
         authorName: book.authur_name,
         coverImageURL: book.cover_img,
         bookPreview: book.book_preview,
         bookNote: book.book_note,
-        bookDate: book.read_date,
+        bookDate: formattedDate,
         readRating: book.read_rating,
       });
     } else {

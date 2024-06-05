@@ -65,6 +65,11 @@ p {
   max-width: 100%; /* Ensures paragraphs respect their container's width */
 }
 
+/* svg in index.ejs  */
+.svg-img{
+  padding-right: 20px;
+}
+
 /* delete and edit [index.ejs] */
 .btn-container {
   display: flex;
@@ -109,6 +114,15 @@ p {
   min-height: 10rem;
   background-color: antiquewhite;
   border-radius: 5px;
+}
+
+/* small color*/
+small {
+  color: #799351;
+}
+/* note.ejs*/
+.container-preview, .container-notes {
+  display: inline;
 }
 
 /* textarea adjustment [submit.ejs]*/
