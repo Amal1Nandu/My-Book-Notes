@@ -121,7 +121,7 @@ small {
   color: #799351;
 }
 /* note.ejs*/
-.container-preview, .container-notes {
+.preview, .notes {
   display: inline;
 }
 
